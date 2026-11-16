@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+  }
+  &:has(> head > meta[name="color-scheme"][content="light"]) {
+    color-scheme: light;
+  }
+
+  /* Токены палитры — по умолчанию Linear Graphite */
+  --bg-app: light-dark(#f6f7f9, #0d0e11);
+  --bg-panel: light-dark(#ffffff, #14161b);
+  --bg-elevated: light-dark(#f1f3f7, #1b1e25);
+  --bg-hover: light-dark(rgba(15, 23, 42, 0.05), rgba(255, 255, 255, 0.05));
+  --border-subtle: light-dark(rgba(15, 23, 42, 0.1), rgba(255, 255, 255, 0.08));
+  --border-strong: light-dark(rgba(15, 23, 42, 0.18), rgba(255, 255, 255, 0.16));
+
+  --text-primary: light-dark(#0f172a, #ffffff);
+  --text-secondary: light-dark(#334155, #e2e8f0);
+  --text-muted: light-dark(#64748b, #94a3b8);
+
+  --accent: light-dark(#2563eb, #3b82f6);
+  --accent-soft: light-dark(rgba(37, 99, 235, 0.12), rgba(59, 130, 246, 0.16));
+  --accent-fg: #ffffff;
+
+  --status-ok: light-dark(#059669, #10b981);
+  --status-warn: light-dark(#d97706, #f59e0b);
+  --status-danger: light-dark(#dc2626, #ef4444);
+
+  --grid-dot: light-dark(rgba(15, 23, 42, 0.12), rgba(255, 255, 255, 0.09));
+  --scrollbar-thumb: light-dark(#cbd5e1, #334155);
+  --scrollbar-track: transparent;
+
+  /* Шрифт по умолчанию */
+  --font-active: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* Настройки шрифта интерфейса */
+:root[data-font="geist"] {
+  --font-active: "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:root[data-font="segoe"] {
+  --font-active: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root[data-font="jetbrains"] {
+  --font-active: "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
+}
+
+:root[data-font="outfit"] {
+  --font-active: "Outfit", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root[data-font="ibm-plex"] {
+  --font-active: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:root[data-font="fira-code"] {
+  --font-active: "Fira Code", "Cascadia Code", "Consolas", monospace;
+}
+
+/* Пресет 2: Raycast Obsidian */
+:root[data-preset="obsidian"] {
+  --bg-app: light-dark(#f7f7f5, #121214);
+  --bg-panel: light-dark(#ffffff, #18181b);
+  --bg-elevated: light-dark(#f0f0ec, #212126);
+  --accent: light-dark(#059669, #10b981);
+  --accent-soft: light-dark(rgba(5, 150, 105, 0.12), rgba(16, 185, 129, 0.16));
+}
+
+/* Пресет 3: Cursor Blueprint */
+:root[data-preset="blueprint"] {
+  --bg-app: light-dark(#f8fafc, #0b0f14);
+  --bg-panel: light-dark(#ffffff, #10161f);
+  --bg-elevated: light-dark(#eef2f7, #161f2c);
+  --accent: light-dark(#d97706, #f59e0b);
+  --accent-soft: light-dark(rgba(217, 119, 6, 0.12), rgba(245, 158, 11, 0.16));
+  --accent-fg: light-dark(#ffffff, #0b0f14);
+}
+
+/* Пресет 4: Midnight Neon / Deep Violet */
+:root[data-preset="midnight"] {
+  --bg-app: light-dark(#f5f3ff, #0c0a1a);
+  --bg-panel: light-dark(#ffffff, #13102b);
+  --bg-elevated: light-dark(#ede9fe, #1c183d);
+  --accent: light-dark(#7c3aed, #a855f7);
+  --accent-soft: light-dark(rgba(124, 58, 237, 0.12), rgba(168, 85, 247, 0.16));
+  --accent-fg: #ffffff;
+}
+
+/* Безрамочное перемещение окна */
+[data-tauri-drag-region] {
+  -webkit-app-region: drag;
+}
+
+button,
+input,
+select,
+textarea,
+dialog,
+[data-no-drag] {
+  -webkit-app-region: no-drag;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-active);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.scroller {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+@supports not (scrollbar-color: auto) {
+  .scroller::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroller::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+  .scroller::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
+/* Нативные диалоги по стандарту modern-web-guidance */
+dialog:modal {
+  overscroll-behavior: contain;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  padding: 0;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.canvas-grid-dots {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.canvas-grid-blueprint {
+  background-image:
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

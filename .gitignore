@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build outputs
+dist/
+build/
+
+# Rust & Tauri build outputs
+src-tauri/target/
+.cargo-target/
+target/
+*.pdb
+
+# Local release binaries (uploaded to GitHub Releases)
+publish/*.exe
+publish/*.zip
+publish/portable/*.exe
+publish/portable/*.zip
+publish/portable/*.dll
+
+# Logs & temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Antigravity & Agent artifacts
+.system_generated/
+.gemini/

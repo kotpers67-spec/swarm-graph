@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SwarmGraph",
+  "version": "1.0.0",
+  "identifier": "dev.kotpe.swarmgraph",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "SwarmGraph — Графы работы агентов",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1024,
+        "minHeight": 680,
+        "resizable": true,
+        "center": true,
+        "decorations": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": [
+      "F:/Projects/.cargo-target/swarm-graph-icons/32x32.png",
+      "F:/Projects/.cargo-target/swarm-graph-icons/128x128.png",
+      "F:/Projects/.cargo-target/swarm-graph-icons/128x128@2x.png",
+      "F:/Projects/.cargo-target/swarm-graph-icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "displayLanguageSelector": false,
+        "languages": ["Russian", "English"]
+      }
+    }
+  }
+}
