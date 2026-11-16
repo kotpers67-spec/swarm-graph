@@ -38,7 +38,6 @@ pub fn needs_translation_to_ru(text: &str) -> bool {
             cyrillic += 1;
         }
     }
-    // Если есть латиница: чистый английский (от 4 символов) или смешанный текст с преобладанием латиницы
     (latin >= 4 && cyrillic == 0) || (latin >= 6 && latin >= cyrillic)
 }
 
@@ -173,7 +172,6 @@ impl TranslatorService {
     }
 
     async fn translate_chunk(&self, chunk: &str) -> Result<String, String> {
-        // Первичный запрос: gtx endpoint
         let primary_res = self
             .client
             .get("https://translate.googleapis.com/translate_a/single")
@@ -197,7 +195,6 @@ impl TranslatorService {
             }
         }
 
-        // Вторичный надежный резервный запрос: clients5 endpoint
         let fallback_res = self
             .client
             .get("https://clients5.google.com/translate_a/t")

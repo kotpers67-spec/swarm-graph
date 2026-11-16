@@ -28,7 +28,6 @@ interface GraphCanvasProps {
   onUpdateNodePosition: (id: string, x: number, y: number) => void;
   onResetLayout: () => void;
   onToggleCompactLayout?: () => void;
-  // Replay controls
   board: BoardMessage[];
   replaySeq: number | null;
   isPlaying: boolean;
@@ -150,7 +149,6 @@ export function GraphCanvas({
   const effectiveSeq = replaySeq ?? maxSeq;
   const isLiveMode = replaySeq === null;
 
-  // Длительность волновой анимации в зависимости от скорости в настройках
   const waveDuration =
     settings.animationSpeed === "fast"
       ? "1.0s"
@@ -183,7 +181,6 @@ export function GraphCanvas({
       }`}
       style={{ backgroundColor: "var(--bg-app)" }}
     >
-      {/* Панель управления масштабом */}
       <div
         className="absolute top-3 right-3 z-20 flex items-center gap-1 p-1 rounded-lg border shadow-sm backdrop-blur-md"
         style={{
@@ -268,14 +265,12 @@ export function GraphCanvas({
         </button>
       </div>
 
-      {/* Трансформируемая сцена графа */}
       <div
         className="absolute inset-0 origin-top-left"
         style={{
           transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
         }}
       >
-        {/* SVG слой связей и волнообразных импульсов */}
         <svg
           className="overflow-visible pointer-events-none"
           width="1"
@@ -337,7 +332,6 @@ export function GraphCanvas({
 
             return (
               <g key={edge.id}>
-                {/* Фоновая линия связи */}
                 <path
                   d={pathD}
                   fill="none"
@@ -356,11 +350,9 @@ export function GraphCanvas({
                   opacity={highlighted ? 1 : 0.7}
                 />
 
-                {/* Волнообразная пульсирующая волна к вызванному агенту */}
                 {(edge.isActiveAtCursor ||
                   (highlighted && edge.handoffRole === "prompt")) && (
                   <g>
-                    {/* Внешнее мягкое свечение волны */}
                     <circle r="12" fill="var(--accent)" opacity="0.32">
                       <animateMotion
                         path={pathD}
@@ -368,7 +360,6 @@ export function GraphCanvas({
                         repeatCount="indefinite"
                       />
                     </circle>
-                    {/* Ядро импульса */}
                     <circle r="5.5" fill="#ffffff">
                       <animateMotion
                         path={pathD}
@@ -386,7 +377,6 @@ export function GraphCanvas({
                   </g>
                 )}
 
-                {/* Бейдж связи */}
                 <g transform={`translate(${mx}, ${my})`}>
                   <rect
                     x={-Math.max(26, edge.label.length * 3.8 + 12)}
@@ -416,7 +406,6 @@ export function GraphCanvas({
           })}
         </svg>
 
-        {/* Карточки узлов агентов с плавной анимацией появления */}
         <AnimatePresence>
           {graph.nodes.map((node) => {
             const isSelected = node.id === selectedNodeId;
@@ -473,7 +462,6 @@ export function GraphCanvas({
                 }}
                 className="absolute rounded-xl border px-3 py-2 cursor-pointer flex flex-col justify-between transition-colors z-10"
               >
-                {/* Верхняя строка: статус, имя, модель */}
                 <div className="flex items-center justify-between gap-2 min-w-0">
                   <div className="flex items-center gap-2 min-w-0">
                     <span
@@ -500,7 +488,6 @@ export function GraphCanvas({
                   </span>
                 </div>
 
-                {/* Подсветка цепочки передачи задачи: от кого получен промпт и кому передан */}
                 {settings.highlightHandoffChain &&
                   (node.promptSource || node.handoffTarget) && (
                     <div className="flex flex-col gap-0.5 my-1 text-[10px] font-medium border-t pt-1" style={{ borderColor: "var(--border-subtle)" }}>
@@ -537,7 +524,6 @@ export function GraphCanvas({
                     </div>
                   )}
 
-                {/* Нижняя строка: подзаголовок и счётчик сообщений */}
                 <div className="flex items-center justify-between gap-2 text-[11px] min-w-0 pt-1">
                   <span
                     className="truncate"
@@ -558,7 +544,6 @@ export function GraphCanvas({
         </AnimatePresence>
       </div>
 
-      {/* Пустое состояние */}
       {graph.nodes.length === 0 && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -591,7 +576,6 @@ export function GraphCanvas({
         </div>
       )}
 
-      {/* Плавающий док хронологии (Replay) */}
       {board.length > 0 && (
         <div
           className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-xl border max-w-[92%] shadow-xl backdrop-blur-md"

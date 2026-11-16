@@ -110,7 +110,6 @@ export function SwarmControlModal({
           color: "var(--text-primary)",
         }}
       >
-        {/* Шапка модального окна */}
         <div
           className="h-14 px-5 border-b flex items-center justify-between shrink-0"
           style={{ borderColor: "var(--border-subtle)" }}
@@ -151,7 +150,6 @@ export function SwarmControlModal({
           </button>
         </div>
 
-        {/* Вкладки управления */}
         <div
           className="flex border-b px-4 gap-2 shrink-0"
           style={{
@@ -185,9 +183,7 @@ export function SwarmControlModal({
           })}
         </div>
 
-        {/* Тело модального окна */}
         <div className="p-5 overflow-y-auto min-h-0 space-y-4 flex-1">
-          {/* Вкладка 1: Добавление воркера */}
           {activeTab === "add" && (
             <form onSubmit={handleCreateWorker} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
@@ -231,7 +227,6 @@ export function SwarmControlModal({
                 </div>
               </div>
 
-              {/* Выбор модели: Gemini, Claude, Codex/OpenAI */}
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold block" style={{ color: "var(--text-secondary)" }}>
                   Модель агента (Claude, Codex, Gemini)
@@ -265,7 +260,6 @@ export function SwarmControlModal({
                 </div>
               </div>
 
-              {/* Текст брифа / начального промпта */}
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold block" style={{ color: "var(--text-secondary)" }}>
                   Бриф задачи (@mention assignment)
@@ -302,7 +296,6 @@ export function SwarmControlModal({
             </form>
           )}
 
-          {/* Вкладка 2: Отправить задание на доску */}
           {activeTab === "message" && (
             <form onSubmit={handleSendMessage} className="space-y-4">
               <div className="space-y-1.5">
@@ -344,7 +337,6 @@ export function SwarmControlModal({
             </form>
           )}
 
-          {/* Вкладка 3: Состав роя */}
           {activeTab === "members" && (
             <div className="space-y-2">
               <div className="text-xs font-semibold" style={{ color: "var(--text-secondary)" }}>
@@ -402,7 +394,6 @@ export function SwarmControlModal({
             </div>
           )}
 
-          {/* Вкладка 4: Мост для Claude Code и Codex */}
           {activeTab === "bridge" && (
             <div className="space-y-4">
               <div>
@@ -414,7 +405,6 @@ export function SwarmControlModal({
                 </p>
               </div>
 
-              {/* Вариант 1: Claude Code MCP */}
               <div
                 className="p-3.5 rounded-xl border space-y-2"
                 style={{
@@ -452,7 +442,6 @@ export function SwarmControlModal({
                 </pre>
               </div>
 
-              {/* Вариант 2: Консольный CLI для Codex / Bash / PowerShell */}
               <div
                 className="p-3.5 rounded-xl border space-y-2"
                 style={{

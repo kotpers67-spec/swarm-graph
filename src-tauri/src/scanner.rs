@@ -712,7 +712,6 @@ pub fn scan_sessions(brain_dir: &Path) -> Vec<SessionSummary> {
         });
     }
 
-    // Сканируем Codex сессии
     if let Some(home) = dirs::home_dir() {
         let codex_index = home.join(".codex").join("session_index.jsonl");
         if codex_index.exists() {
@@ -745,7 +744,6 @@ pub fn scan_sessions(brain_dir: &Path) -> Vec<SessionSummary> {
         }
     }
 
-    // Сканируем Claude Code проекты
     if let Some(home) = dirs::home_dir() {
         let claude_projects_dir = home.join(".claude").join("projects");
         if claude_projects_dir.exists() && claude_projects_dir.is_dir() {
@@ -967,7 +965,6 @@ pub fn load_session_detail(brain_dir: &Path, session_id: &str) -> Option<Session
     let board = parse_board(&board_jsonl);
     let mut subagents = parse_subagents_dir(&subagents_dir, session_id);
 
-    // Также проверяем субагентов, порождённых участниками роя
     let mut seen_sub_ids: BTreeSet<String> =
         subagents.iter().map(|s| s.conversation_id.clone()).collect();
     for member in &members {

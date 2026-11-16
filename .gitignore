@@ -40,5 +40,16 @@ Thumbs.db
 *.sw?
 
 # Antigravity & Agent artifacts
+.agents/
 .system_generated/
 .gemini/
+scripts/
+
+# Media & Promo scratch
+promo-*/
+*Promo*
+*.zip
+*.mp4
+*.wav
+*.avi
+*.mov

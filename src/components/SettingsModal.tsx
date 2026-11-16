@@ -271,7 +271,6 @@ export function SettingsModal({
           color: "var(--text-primary)",
         }}
       >
-        {/* Шапка модального окна */}
         <div
           className="h-14 px-5 border-b flex items-center justify-between shrink-0"
           style={{ borderColor: "var(--border-subtle)" }}
@@ -308,9 +307,7 @@ export function SettingsModal({
           </button>
         </div>
 
-        {/* Тело настроек */}
         <div className="p-5 space-y-5 overflow-y-auto min-h-0">
-          {/* Стили оформления (Preset) */}
           <section className="space-y-2">
             <label className="text-xs font-semibold block" style={{ color: "var(--text-secondary)" }}>
               Стиль оформления
@@ -346,7 +343,6 @@ export function SettingsModal({
             </div>
           </section>
 
-          {/* Режим темы */}
           <section className="space-y-2">
             <label className="text-xs font-semibold block" style={{ color: "var(--text-secondary)" }}>
               Тема интерфейса
@@ -375,7 +371,6 @@ export function SettingsModal({
             </div>
           </section>
 
-          {/* Шрифт интерфейса */}
           <section className="space-y-2 pt-2 border-t" style={{ borderColor: "var(--border-subtle)" }}>
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold flex items-center gap-1.5" style={{ color: "var(--text-secondary)" }}>
@@ -439,13 +434,11 @@ export function SettingsModal({
             </div>
           </section>
 
-          {/* Динамика агентов роя и фильтрация */}
           <section className="space-y-2.5 pt-2 border-t" style={{ borderColor: "var(--border-subtle)" }}>
             <label className="text-xs font-semibold block" style={{ color: "var(--text-secondary)" }}>
               Динамика агентов и фильтрация
             </label>
 
-            {/* Исправленные удобные тумблеры */}
             <ToggleRow
               label="Появление только после старта"
               desc="Агент отображается на холсте только когда ему назначен промпт или запущена задача"
@@ -482,7 +475,6 @@ export function SettingsModal({
               }
             />
 
-            {/* Скорость анимации волн */}
             <div className="space-y-1.5 pt-1">
               <label className="text-[11px] font-medium" style={{ color: "var(--text-muted)" }}>
                 Скорость пульсирующих волн передачи задач
@@ -513,7 +505,6 @@ export function SettingsModal({
             </div>
           </section>
 
-          {/* Источники и платформы агентов */}
           <section
             className="space-y-3 pt-3 border-t"
             style={{ borderColor: "var(--border-subtle)" }}
@@ -545,7 +536,6 @@ export function SettingsModal({
               </span>
             </div>
 
-            {/* Сетка чекбоксов платформ */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {PLATFORMS.map((p) => {
                 const isChecked = enabledPlatforms.includes(p.id);
@@ -623,7 +613,6 @@ export function SettingsModal({
               })}
             </div>
 
-            {/* Список кастомных путей */}
             {enabledPlatforms.includes("custom") && (
               <div
                 className="p-3 rounded-xl border space-y-2.5"
@@ -731,7 +720,6 @@ export function SettingsModal({
             )}
           </section>
 
-          {/* Сетка холста */}
           <section className="space-y-2 pt-2 border-t" style={{ borderColor: "var(--border-subtle)" }}>
             <label className="text-xs font-semibold block" style={{ color: "var(--text-secondary)" }}>
               Сетка холста
@@ -760,7 +748,6 @@ export function SettingsModal({
             </div>
           </section>
 
-          {/* Рабочая папка brain */}
           <section className="pt-2 border-t flex items-center justify-between" style={{ borderColor: "var(--border-subtle)" }}>
             <div>
               <span className="font-medium text-xs block">Папка Antigravity brain</span>
@@ -784,7 +771,6 @@ export function SettingsModal({
           </section>
         </div>
 
-        {/* Подвал */}
         <div
           className="h-14 px-5 border-t flex items-center justify-end shrink-0"
           style={{ borderColor: "var(--border-subtle)" }}

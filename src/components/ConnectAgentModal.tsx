@@ -27,7 +27,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
     }
   }, [open]);
 
-  // Генерация подробного системного промпта под выбранную платформу
   const generatePrompt = (): string => {
     const agentName = platform === "claude" ? "claude-code" : platform === "codex" ? "codex-agent" : customAgentName.trim() || "custom-worker";
     const pathExample = sessionRootPath ? sessionRootPath.replace(/\\/g, "/") : ".";
@@ -162,7 +161,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
         color: "var(--text-primary)",
       }}
     >
-      {/* Шапка модального окна */}
       <div
         className="px-5 py-4 border-b flex items-center justify-between gap-3 shrink-0"
         style={{ borderColor: "var(--border-subtle)" }}
@@ -194,7 +192,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
         </button>
       </div>
 
-      {/* Переключатель платформ */}
       <div className="p-5 space-y-4 max-h-[75vh] overflow-y-auto scroller">
         <div className="flex items-center gap-2 p-1 rounded-xl border" style={{ backgroundColor: "var(--bg-elevated)", borderColor: "var(--border-subtle)" }}>
           {(
@@ -224,7 +221,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
           })}
         </div>
 
-        {/* Настройки для кастомного агента */}
         {platform === "custom" && (
           <div
             className="p-3 rounded-xl border space-y-2.5"
@@ -270,7 +266,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
           </div>
         )}
 
-        {/* Информация о быстром старте */}
         <div
           className="p-3 rounded-xl border flex items-start gap-2.5 text-xs leading-relaxed"
           style={{ backgroundColor: "var(--bg-elevated)", borderColor: "var(--border-subtle)" }}
@@ -286,7 +281,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
           </div>
         </div>
 
-        {/* Превью генерируемого промпта */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs">
             <span className="font-medium" style={{ color: "var(--text-primary)" }}>
@@ -310,7 +304,6 @@ export function ConnectAgentModal({ open, onClose, sessionRootPath = "" }: Conne
         </div>
       </div>
 
-      {/* Футер с кнопками */}
       <div
         className="px-5 py-3.5 border-t flex items-center justify-between gap-3 shrink-0"
         style={{ backgroundColor: "var(--bg-elevated)", borderColor: "var(--border-subtle)" }}

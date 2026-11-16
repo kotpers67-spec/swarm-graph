@@ -71,10 +71,8 @@ export function TopBar({
   };
 
   const handleDragStart = (e: React.PointerEvent | React.MouseEvent) => {
-    // Реагируем только на основную кнопку (левый клик)
     if (e.button !== 0) return;
 
-    // Исключаем интерактивные элементы и зоны no-drag
     const target = e.target as HTMLElement | null;
     if (
       target?.closest(
@@ -84,7 +82,6 @@ export function TopBar({
       return;
     }
 
-    // Мгновенный вызов нативного drag через API текущего окна или bridge
     try {
       getCurrentWindow().startDragging();
     } catch {
@@ -115,7 +112,6 @@ export function TopBar({
         borderColor: "var(--border-subtle)",
       }}
     >
-      {/* Левая зона: Логотип и активная сессия */}
       <div className="flex items-center gap-3 min-w-0">
         <div className="flex items-center gap-2 shrink-0 cursor-pointer">
           <span
@@ -186,7 +182,6 @@ export function TopBar({
         )}
       </div>
 
-      {/* Центральная зона: Поиск Ctrl+K и быстрый фильтр «Только активные» */}
       <div className="flex items-center gap-2 no-drag">
         <button
           type="button"
@@ -214,7 +209,6 @@ export function TopBar({
           </kbd>
         </button>
 
-        {/* Быстрый тумблер: Только активные работы */}
         <button
           type="button"
           onClick={onToggleActiveOnly}
@@ -249,7 +243,6 @@ export function TopBar({
           )}
         </button>
 
-        {/* Кнопка компактной группировки оркестра роя */}
         <button
           type="button"
           onClick={onToggleCompactLayout}
@@ -285,7 +278,6 @@ export function TopBar({
         </button>
       </div>
 
-      {/* Правая зона: Инструменты, Настройки и кнопки окна */}
       <div className="flex items-center gap-1.5 shrink-0 no-drag">
         <button
           type="button"
@@ -344,7 +336,6 @@ export function TopBar({
           )}
         </button>
 
-        {/* Кнопка быстрого подключения агента */}
         <button
           type="button"
           onClick={onOpenConnectAgent}
@@ -374,7 +365,6 @@ export function TopBar({
           <span className="hidden lg:inline">Экспорт</span>
         </button>
 
-        {/* Кнопка открытия Настроек */}
         <button
           type="button"
           onClick={onOpenSettings}
@@ -389,13 +379,11 @@ export function TopBar({
           <Settings className="w-3.5 h-3.5" strokeWidth={1.6} />
         </button>
 
-        {/* Тонкий разделитель перед кнопками окна */}
         <div
           className="w-px h-4 mx-1"
           style={{ backgroundColor: "var(--border-subtle)" }}
         />
 
-        {/* Интегрированные кнопки безрамочного окна */}
         <div className="flex items-center gap-0.5">
           <button
             type="button"

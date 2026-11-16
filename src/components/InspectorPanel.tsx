@@ -34,36 +34,36 @@ export function getExtensionColor(ext?: string): string {
   switch (upper) {
     case "TS":
     case "TSX":
-      return "#3b82f6"; // синий
+      return "#3b82f6";
     case "PY":
     case "PYTHON":
-      return "#22c55e"; // зеленый
+      return "#22c55e";
     case "RS":
     case "RUST":
-      return "#f97316"; // оранжевый
+      return "#f97316";
     case "JSON":
-      return "#eab308"; // желтый
+      return "#eab308";
     case "JS":
     case "JSX":
     case "MJS":
     case "CJS":
-      return "#facc15"; // желтый
+      return "#facc15";
     case "HTML":
     case "HTM":
-      return "#ef4444"; // красный
+      return "#ef4444";
     case "CSS":
     case "SCSS":
     case "LESS":
-      return "#06b6d4"; // циан
+      return "#06b6d4";
     case "MD":
     case "MARKDOWN":
-      return "#a855f7"; // фиолетовый
+      return "#a855f7";
     case "TOML":
     case "YAML":
     case "YML":
-      return "#ec4899"; // розовый
+      return "#ec4899";
     default:
-      return "#94a3b8"; // серый
+      return "#94a3b8";
   }
 }
 
@@ -252,7 +252,6 @@ export function InspectorPanel({
   const renderTranslatedBlock = (key: string, rawText: string) => {
     const trimmed = rawText.trim();
     const translated = translatedMap[trimmed];
-    // Отображаем перевод всегда, когда он есть в словаре
     const hasRu = Boolean(translated && translated !== trimmed);
     const showOrig = Boolean(showOriginalIds[key]);
     const displayText = autoTranslate && hasRu && !showOrig ? translated : rawText;
@@ -289,7 +288,6 @@ export function InspectorPanel({
         borderColor: "var(--border-subtle)",
       }}
     >
-      {/* Вкладки инспектора */}
       <div
         className="h-11 px-2 border-b flex items-center gap-1 shrink-0"
         style={{ borderColor: "var(--border-subtle)" }}
@@ -322,7 +320,6 @@ export function InspectorPanel({
         })}
       </div>
 
-      {/* Содержимое вкладки */}
       {tab === "board" && (
         <div className="flex-1 min-h-0 flex flex-col">
           <div className="p-2.5 border-b shrink-0" style={{ borderColor: "var(--border-subtle)" }}>
@@ -574,7 +571,6 @@ export function InspectorPanel({
                     );
                   })}
 
-                  {/* Раскрывающийся блок подробностей по клику на шаг */}
                   {isExpanded && (
                     <div
                       className="p-3 my-1 rounded-xl border space-y-2.5 transition-all text-xs"

@@ -77,7 +77,6 @@ export function buildSwarmGraph(
 
   const knownMemberNames = new Set(detail.members.map((m) => m.name));
 
-  // Анализируем всю историю сообщений для выявления цепочек «от кого промпт» и «кому задача»
   for (const msg of filteredBoard) {
     sentCounts.set(msg.agent, (sentCounts.get(msg.agent) ?? 0) + 1);
 
@@ -110,7 +109,6 @@ export function buildSwarmGraph(
       if (!promptSourceMap.has(target)) {
         promptSourceMap.set(target, msg.agent);
       }
-      // Последний агент, которому передана задача от этого автора
       handoffTargetMap.set(msg.agent, target);
 
       const edgeId = `${msg.agent}->${target}`;
@@ -145,7 +143,6 @@ export function buildSwarmGraph(
   const rawNodes: GraphNode[] = [];
   const convToNodeId = new Map<string, string>();
 
-  // Если сессия без явных участников роя — создаём корневой узел
   if (detail.members.length === 0) {
     const rootId = "root-session";
     convToNodeId.set(detail.summary.id, rootId);
@@ -289,7 +286,6 @@ export function buildSwarmGraph(
     }
   }
 
-  // Вложенные субагенты
   const subCols = isCompact ? 5 : 4;
   const subGapX = isCompact ? 216 : 230;
   const subGapY = isCompact ? 104 : 124;
@@ -355,9 +351,6 @@ export function buildSwarmGraph(
     }
   });
 
-  // Применяем фильтры:
-  // 1. «Появление агента только после старта» (appearOnStartOnly)
-  // 2. «Только активные работы» (onlyActiveWork)
   const finalNodes = rawNodes.filter((node) => {
     if (node.kind === "coordinator") return true;
 
@@ -385,7 +378,6 @@ export function buildSwarmGraph(
 
   const activeNodeIds = new Set(finalNodes.map((n) => n.id));
 
-  // Фильтруем рёбра, оставляя только связи между видимыми узлами
   const finalEdges = Array.from(edgeMap.values()).filter(
     (e) => activeNodeIds.has(e.source) && activeNodeIds.has(e.target),
   );

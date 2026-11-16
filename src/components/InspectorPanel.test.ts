@@ -19,12 +19,12 @@ describe("InspectorPanel Step Actions & Formats", () => {
   });
 
   it("returns correct color tokens for file extensions", () => {
-    expect(getExtensionColor("ts")).toBe("#3b82f6"); // синий
+    expect(getExtensionColor("ts")).toBe("#3b82f6");
     expect(getExtensionColor("TSX")).toBe("#3b82f6");
-    expect(getExtensionColor("py")).toBe("#22c55e"); // зеленый
-    expect(getExtensionColor("rs")).toBe("#f97316"); // оранжевый
-    expect(getExtensionColor("json")).toBe("#eab308"); // желтый
-    expect(getExtensionColor("unknown")).toBe("#94a3b8"); // дефолтный серый
+    expect(getExtensionColor("py")).toBe("#22c55e");
+    expect(getExtensionColor("rs")).toBe("#f97316");
+    expect(getExtensionColor("json")).toBe("#eab308");
+    expect(getExtensionColor("unknown")).toBe("#94a3b8");
   });
 
   it("correctly maps Russian first-person present-tense and English action verbs", () => {

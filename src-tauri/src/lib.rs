@@ -251,7 +251,6 @@ fn add_swarm_worker(
     }
     let _ = std::fs::write(&members_path, serde_json::to_string_pretty(&root).unwrap_or_default());
 
-    // Публикуем бриф на доску роя
     let existing = scanner::parse_board(&board_path);
     let next_seq = (existing.len() as u64) + 1;
     let brief_text = format!("@{name} {brief}");

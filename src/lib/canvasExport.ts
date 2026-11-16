@@ -98,7 +98,6 @@ export function renderFrameToCanvas(
   ctx.fillStyle = pal.bg;
   ctx.fillRect(0, 0, width, height);
 
-  // Сетка фона
   ctx.fillStyle = pal.grid;
   for (let gx = 20; gx < width; gx += 24) {
     for (let gy = 56; gy < height - 64; gy += 24) {
@@ -106,7 +105,6 @@ export function renderFrameToCanvas(
     }
   }
 
-  // Верхняя шапка кадра
   ctx.fillStyle = pal.panel;
   ctx.fillRect(0, 0, width, 48);
   ctx.strokeStyle = pal.border;
@@ -135,7 +133,6 @@ export function renderFrameToCanvas(
 
   if (graph.nodes.length === 0) return;
 
-  // Авто-центрирование графа в области (width x (height - 130))
   let minX = Infinity;
   let minY = Infinity;
   let maxX = -Infinity;
@@ -160,7 +157,6 @@ export function renderFrameToCanvas(
 
   const nodeMap = new Map(graph.nodes.map((n) => [n.id, n]));
 
-  // Рёбра
   for (const edge of graph.edges) {
     const src = nodeMap.get(edge.source);
     const dst = nodeMap.get(edge.target);
@@ -182,7 +178,6 @@ export function renderFrameToCanvas(
     ctx.quadraticCurveTo(cx, cy, tx, ty);
     ctx.stroke();
 
-    // Импульс сообщения на активном ребре
     if (edge.isActiveAtCursor) {
       const t = pulsePhase;
       const px = (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * cx + t * t * tx;
@@ -193,7 +188,6 @@ export function renderFrameToCanvas(
       ctx.fill();
     }
 
-    // Бейдж ребра
     const mx = 0.25 * sx + 0.5 * cx + 0.25 * tx;
     const my = 0.25 * sy + 0.5 * cy + 0.25 * ty;
     ctx.font = "500 11px Inter, Segoe UI, sans-serif";
@@ -209,7 +203,6 @@ export function renderFrameToCanvas(
     ctx.restore();
   }
 
-  // Узлы
   for (const node of graph.nodes) {
     drawRoundedRect(ctx, node.x, node.y, GRAPH_NODE_WIDTH, GRAPH_NODE_HEIGHT, 10);
     ctx.fillStyle = pal.panel;
@@ -218,7 +211,6 @@ export function renderFrameToCanvas(
     ctx.lineWidth = node.isActiveAtCursor ? 2 : 1;
     ctx.stroke();
 
-    // Индикатор статуса
     ctx.fillStyle =
       node.status === "working" || node.status === "alive"
         ? pal.ok
@@ -240,7 +232,6 @@ export function renderFrameToCanvas(
 
   ctx.restore();
 
-  // Нижняя строка текущего сообщения
   const currentMsg = detail.board.find((m) => m.seq === shownSeq) ?? detail.board[detail.board.length - 1];
   ctx.fillStyle = pal.panel;
   ctx.fillRect(0, height - 64, width, 64);

@@ -88,12 +88,10 @@ export function App() {
     Record<string, { x: number; y: number }>
   >({});
 
-  // Replay
   const [replaySeq, setReplaySeq] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
 
-  // Интерактивный ресайз боковых панелей с сохранением в localStorage
   const [sidebarWidth, setSidebarWidth] = useState<number>(() => {
     try {
       const saved = localStorage.getItem("swarmgraph-sidebar-width");
@@ -197,11 +195,9 @@ export function App() {
     [inspectorWidth],
   );
 
-  // Переводчик EN -> RU
   const [isTranslating, setIsTranslating] = useState(false);
   const [translatedMap, setTranslatedMap] = useState<Record<string, string>>({});
 
-  // Модальные окна
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -215,7 +211,6 @@ export function App() {
         ? false
         : systemDark;
 
-  // Сохранение настроек в localStorage
   useEffect(() => {
     try {
       localStorage.setItem("swarmgraph-settings", JSON.stringify(settings));
@@ -224,7 +219,6 @@ export function App() {
     }
   }, [settings]);
 
-  // Отслеживание системной темы
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const listener = (e: MediaQueryListEvent) => setSystemDark(e.matches);
@@ -232,7 +226,6 @@ export function App() {
     return () => mq.removeEventListener("change", listener);
   }, []);
 
-  // Синхронизация <meta name="color-scheme"> и пресета оформления
   useEffect(() => {
     const meta = document.querySelector('meta[name="color-scheme"]');
     if (meta) {
@@ -247,7 +240,6 @@ export function App() {
     document.documentElement.setAttribute("data-preset", settings.preset);
   }, [settings.preset]);
 
-  // Синхронизация шрифта интерфейса
   useEffect(() => {
     const font = settings.fontFamily ?? "geist";
     document.documentElement.setAttribute("data-font", font);
@@ -258,7 +250,6 @@ export function App() {
     }
   }, [settings.fontFamily]);
 
-  // Снятие стандартных рамок ОС после полной загрузки WebView2 (без крашей 0x80070578)
   useEffect(() => {
     try {
       import("@tauri-apps/api/webviewWindow")
@@ -272,7 +263,6 @@ export function App() {
     }
   }, []);
 
-  // Горячая клавиша Ctrl+K / Cmd+K и Ctrl+,
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
@@ -287,7 +277,6 @@ export function App() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // Загрузка списка сессий
   const refreshSessions = useCallback(async () => {
     try {
       const list = await listSessions();
@@ -305,7 +294,6 @@ export function App() {
     refreshSessions();
   }, [refreshSessions]);
 
-  // Подписка на файловые события brain (watcher)
   useEffect(() => {
     let unlisten: (() => void) | undefined;
     subscribeBrainChanges((event) => {
@@ -323,7 +311,6 @@ export function App() {
     };
   }, [refreshSessions, selectedSessionId]);
 
-  // Загрузка деталей выбранной сессии
   useEffect(() => {
     if (!selectedSessionId) {
       setDetail(null);
@@ -347,7 +334,6 @@ export function App() {
     };
   }, [selectedSessionId]);
 
-  // Фоновый автоперевод текстов на русский язык (сообщения доски, шаги транскрипта, промпты)
   useEffect(() => {
     if (!settings.autoTranslate || !detail) return;
     const missing: string[] = [];
@@ -365,12 +351,10 @@ export function App() {
       }
     };
 
-    // 1. Сообщения доски роя
     for (const msg of detail.board) {
       addIfMissing(msg.text, 4);
     }
 
-    // 2. Шаги транскриптов, действия инструментов и промпты субагентов
     for (const steps of Object.values(detail.transcripts)) {
       for (const step of steps) {
         addIfMissing(step.content_preview, 6);
@@ -391,12 +375,11 @@ export function App() {
         if (!cancelled && Object.keys(map).length > 0) {
           setTranslatedMap((prev) => {
             const next = { ...prev, ...map };
-            // Сохраняем также по trimmed ключам
             for (const [k, v] of Object.entries(map)) {
               next[k.trim()] = v;
             }
             return next;
-          });
+            });
         }
       })
       .catch((e) => console.warn("Фоновый перевод пропущен:", e))
@@ -409,7 +392,6 @@ export function App() {
     };
   }, [detail, settings.autoTranslate, translatedMap]);
 
-  // Построение графа с учетом фильтров и настроек
   const graph = useMemo(() => {
     return buildSwarmGraph(detail, {
       replaySeq,
@@ -423,7 +405,6 @@ export function App() {
     return sessions.find((s) => s.id === selectedSessionId) ?? null;
   }, [sessions, selectedSessionId]);
 
-  // Replay таймер
   useEffect(() => {
     if (!isPlaying || !detail || detail.board.length === 0) return;
     const seqs = detail.board.map((m) => m.seq);
@@ -568,7 +549,6 @@ export function App() {
           onSelectChannel={setActiveChannel}
         />
 
-        {/* Разделитель-ресайзер левой панели */}
         <div
           role="separator"
           aria-orientation="vertical"
@@ -609,7 +589,6 @@ export function App() {
           onChangeSpeed={setPlaybackSpeed}
         />
 
-        {/* Разделитель-ресайзер правой панели */}
         <div
           role="separator"
           aria-orientation="vertical"

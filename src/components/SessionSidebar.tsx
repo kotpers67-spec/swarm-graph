@@ -128,7 +128,6 @@ export function SessionSidebar({
         borderColor: "var(--border-subtle)",
       }}
     >
-      {/* Поиск и создание роя */}
       <div className="p-2.5 border-b shrink-0 space-y-2" style={{ borderColor: "var(--border-subtle)" }}>
         <div className="flex items-center gap-1.5">
           <div
@@ -153,7 +152,6 @@ export function SessionSidebar({
             />
           </div>
 
-          {/* Кнопка создания / добавления в рой */}
           <button
             type="button"
             onClick={onOpenCreateSwarm}
@@ -171,10 +169,8 @@ export function SessionSidebar({
         </div>
       </div>
 
-      {/* Список роев и сессий с тумблером «Только активные» */}
       <div className="flex-1 min-h-0 overflow-y-auto scroller p-2 space-y-4">
         <div>
-          {/* Шапка списка: заголовок, счётчик и тумблер «Активные» */}
           <div className="px-2 pb-2 flex items-center justify-between">
             <div className="flex items-center gap-1.5 min-w-0">
               <span
@@ -196,7 +192,6 @@ export function SessionSidebar({
               </span>
             </div>
 
-            {/* Тумблер: Только активные */}
             <button
               type="button"
               onClick={onToggleOnlyActiveSessions}
@@ -320,7 +315,6 @@ export function SessionSidebar({
           </div>
         </div>
 
-        {/* Каналы доски */}
         {detail && channels.length > 0 && (
           <div>
             <div
@@ -380,7 +374,6 @@ export function SessionSidebar({
           </div>
         )}
 
-        {/* Участники и субагенты */}
         {graphNodes.length > 0 && (
           <div>
             <div className="px-2 pb-1.5 flex items-center justify-between">
